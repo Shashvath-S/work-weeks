@@ -3,11 +3,11 @@ import "./styles/navbar.css"
 export default function Navbar () {
     return (
         <>
-            <nav className="navbar">
+    <nav className="navbar">
     <ul className="navbar-nav">
       <li className="logo">
         <a href="#" className="nav-link">
-          <span className="link-text logo-text">Fireship</span>
+          <span className="link-text logo-text">Work Weeks</span>
           <svg
             aria-hidden="true"
             focusable="false"
