@@ -13,10 +13,10 @@ export default function Home() {
       <p className="text-gray-600 group-hover:hidden">Organize your list of employees and their personal information, like their name, contact information, and position.</p>
       <div className="hidden group-hover:flex space-x-2 mt-2">
         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          <a href="/admin/employees">Create</a>
+          <a href="/admin/employees/create">Create</a>
         </button>
         <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-        <a href="/admin/employees">View</a>
+        <a href="/admin/employees/view">View</a>
         </button>
       </div>
     </div>
@@ -46,7 +46,7 @@ export default function Home() {
         </button>
       </div>
     </div>
-
+    <a href="/employee/working-time">Employee Page</a>
   </div>
     </div>
   );
