@@ -12,13 +12,13 @@ export default function OptionCard({ title }: { title: string }) {
     >
       <div
         style={{
-          width: "10%",
+          width: "11%",
           height: "100%",
           backgroundColor: "rgb(185, 187, 190)",
           borderRadius: 20,
         }}
       ></div>
-      <div className="flex flex-col" style={{width: "10%",}}>
+      <div className="flex flex-col" style={{width: "12%",}}>
         <h1 style={{ fontSize: "200%", fontWeight: "bold", marginLeft: 20 }}>
           {title}
         </h1>
@@ -26,16 +26,16 @@ export default function OptionCard({ title }: { title: string }) {
           className="flex flex-row place-content-center mt-auto"
           style={{ marginBottom: 20 }}
         >
-          <button style={{borderColor: "black"}} type="button" className="btn">
+          <a style={{borderColor: "black"}} href="employees/create" type="button" className="btn">
             Create
-          </button>
-          <button
-            style={{ borderColor: "black" }}
+          </a>
+          <a
+            style={{ borderColor: "black", marginLeft: 8 }}
             type="button"
             className="btn"
           >
             View
-          </button>
+          </a>
         </div>
       </div>
     </div>

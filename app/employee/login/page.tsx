@@ -6,5 +6,5 @@ export default async function Login() {
 
     const backendSession = await getServerSession(authOptions);
 
-    return <CredentialsForm isLoginForm={true} isAdmin={true} backendSession={backendSession} />
+    return <CredentialsForm isLoginForm={true} isAdmin={false} backendSession={backendSession} />
 }

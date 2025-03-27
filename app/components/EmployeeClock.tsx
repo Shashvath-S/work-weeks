@@ -1,8 +1,9 @@
 "use client";
 
+import { signOut } from 'next-auth/react';
 import React, { useState } from 'react';
 
-export default function page() {
+export default function EmployeeClock () {
 
     const [clockInTime, setClockInTime] = useState("");
     const [clockOutTime, setClockOutTime] = useState("");
@@ -14,6 +15,7 @@ export default function page() {
             <div className="w-full">
                 <div className="text-center mb-4">
                     <h1 className="text-4xl font-bold">Work Weeks</h1>
+                    <button onClick={() => signOut({ callbackUrl: "/" })} className="btn btn-primary">Sign Out</button>
                 </div>
                 <div className="flex flex-col space-y-4 w-full">
                     <div className="flex space-x-4 justify-center">

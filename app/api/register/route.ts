@@ -3,11 +3,18 @@ import db from "@/app/lib/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(request: NextRequest) {
-  const { name, username, password } = await request.json();
+  const { name, email, password, isAdmin } = await request.json();
+  let typeOfRegister;
+
+  if (isAdmin) {
+    typeOfRegister = "admin";
+  } else {
+    typeOfRegister = "employees"
+  }
 
   const checkEmail = db
-    .prepare("SELECT * FROM admin WHERE username = ?")
-    .all(username);
+    .prepare(`SELECT * FROM ${typeOfRegister} WHERE email = ?`)
+    .all(email);
 
   if (checkEmail.length > 0) {
     return NextResponse.json(
@@ -18,7 +25,7 @@ export async function POST(request: NextRequest) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    db.prepare("INSERT INTO admin (username, password, name) VALUES (?, ?, ?)").run(username, hashedPassword, name)
+    db.prepare(`INSERT INTO ${typeOfRegister} (email, password, name) VALUES (?, ?, ?)`).run(email, hashedPassword, name)
 
     return NextResponse.json({ message: "All good" });
   }

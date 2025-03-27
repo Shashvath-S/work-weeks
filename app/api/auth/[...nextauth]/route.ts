@@ -24,14 +24,14 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         let user, role;
         let getUser: IUser[] = db
-          .prepare("SELECT * FROM admin WHERE username = ?")
+          .prepare("SELECT * FROM admin WHERE email = ?")
           .all(credentials?.email) as IUser[];
 
         if (getUser.length > 0) {
           role = "admin";
         } else {
           getUser = db
-          .prepare("SELECT * FROM employees WHERE username = ?")
+          .prepare("SELECT * FROM employees WHERE email = ?")
           .all(credentials?.email) as IUser[];
           if (getUser.length > 0) {
             role = "employee";
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
         if (validPassword) {
           return {
             id: user.id,
-            username: user.email,
+            email: user.email,
             name: user.name,
             role
           };
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.username = user.username;
+        token.email = user.email;
         token.name = user.name;
         token.role = user.role;
       }
@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as number;
-        session.user.username = token.username as string;
+        session.user.email = token.email as string;
         session.user.name = token.name as string;
         session.user.role = token.role as string;
       }
