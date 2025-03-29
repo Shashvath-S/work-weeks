@@ -3,7 +3,7 @@ import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, Tabl
 
 export default function EmployeeTable({ columns, rows }: {
     columns: { key: string, label: string }[],
-    rows: { key: string, email: string }[]
+    rows: iUser[]
 }) {
     console.log("EmployeeTable: ")
     console.log("Columns:", columns);
