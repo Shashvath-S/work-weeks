@@ -1,97 +1,49 @@
-"use client";
+import TableComponent from "@/app/components/TableComponent";
+import db from "@/app/lib/db";
 
-import {
-    Table,
-    TableHeader,
-    TableColumn,
-    TableBody,
-    TableRow,
-    TableCell,
-    getKeyValue,
-  } from "@heroui/table";
-  
-  const rows = [
+const columns = [
     {
-      key: "1",
-      name: "Tony Reichert",
-      role: "CEO",
-      day: "Monday",
-      start: "1:00 PM",
-      end: "5:00 PM",
-      total: "4 hours"
+        key: "name",
+        label: "NAME",
     },
     {
-      key: "2",
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      day: "Monday",
-      start: "",
-      end: "",
-      total: ""
+        key: "role",
+        label: "ROLE",
     },
     {
-      key: "3",
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      day: "Monday",
-      start: "5:30 AM",
-      end: "3:30 PM",
-      total: "10 hours"
+        key: "day",
+        label: "DAY",
     },
     {
-      key: "4",
-      name: "William Howard",
-      role: "Community Manager",
-      day: "Tuesday",
-      start: "7:30 AM",
-      end: "6:30 PM",
-      total: "11 hours"
-    },
-  ];
-  
-  const columns = [
-    {
-      key: "name",
-      label: "NAME",
+        key: "start",
+        label: "START TIME",
     },
     {
-      key: "role",
-      label: "ROLE",
+        key: "end",
+        label: "END TIME",
     },
     {
-      key: "day",
-      label: "DAY",
+        key: "total",
+        label: "TOTAL TIME",
     },
-    {
-      key: "start",
-      label: "START TIME",
-    },
-    {
-      key: "end",
-      label: "END TIME",
-    },
-    {
-      key: "total",
-      label: "TOTAL TIME",
-    },
-  ];
-  
-  export default function Page () {
+];
+
+interface timesheet {
+    name: string,
+    role: string,
+    day?: Date,
+    start?: number,
+    end?: number,
+    total?: number,
+}
+
+export default function Page() {
+    const getUsers: timesheet[] = db.prepare("SELECT * FROM employees").all() as timesheet[];
+
     return (
         <div className="px-4 py-4">
-            <Table aria-label="Example table with dynamic content">
-                <TableHeader columns={columns}>
-                {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-                </TableHeader>
-                <TableBody items={rows}>
-                {(item) => (
-                    <TableRow key={item.key}>
-                    {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
-                    </TableRow>
-                )}
-                </TableBody>
-            </Table>
+            <TableComponent columns={columns} rows={getUsers}/>
         </div>
     )
-  }
+}
   
