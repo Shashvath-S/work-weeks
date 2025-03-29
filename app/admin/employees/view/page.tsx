@@ -1,5 +1,6 @@
 import EmployeeTable from "@/app/components/EmployeeTable";
 import db from "@/app/lib/db";
+import {iUser} from "@/app/components/EmployeeTable"
 
 const columns = [
     {
@@ -12,9 +13,10 @@ const columns = [
     },
 ];
 
+
 export default async function Page() {
-    const rows = db.prepare(`SELECT email, id
-                             FROM employees`).all() as { key: string, name: string, email: string }[]
+    const rows: iUser[] = db.prepare(`SELECT id, name
+                                      FROM employees`).all() as iUser[];
     console.log(rows);
 
     return (
