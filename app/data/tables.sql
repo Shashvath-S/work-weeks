@@ -1,6 +1,7 @@
 CREATE TABLE employees (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE,
+    role TEXT,
     password TEXT,
     name TEXT
 );

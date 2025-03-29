@@ -1,20 +1,20 @@
 'use client'
 import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@heroui/table";
 
-export default function EmployeeTable(props: {
+export default function EmployeeTable({ columns, rows }: {
     columns: { key: string, label: string }[],
     rows: { key: string, email: string }[]
 }) {
     console.log("EmployeeTable: ")
-    console.log("Columns:", props.columns);
-    console.log("Rows:", props.rows);
+    console.log("Columns:", columns);
+    console.log("Rows:", rows);
     return (
         <div>
             <Table aria-label="Employee Table">
-                <TableHeader columns={props.columns}>
+                <TableHeader columns={columns}>
                     {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
                 </TableHeader>
-                <TableBody items={props.rows}>
+                <TableBody items={rows}>
                     {(item: { key: string, email: string }) => (
                         <TableRow key={item.key}>
                             {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
