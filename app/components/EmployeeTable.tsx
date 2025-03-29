@@ -1,6 +1,12 @@
 'use client'
 import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@heroui/table";
 
+export interface iUser {
+    id: number,
+    name: string,
+    role: string
+}
+
 export default function EmployeeTable({ columns, rows }: {
     columns: { key: string, label: string }[],
     rows: iUser[]
@@ -15,8 +21,8 @@ export default function EmployeeTable({ columns, rows }: {
                     {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
                 </TableHeader>
                 <TableBody items={rows}>
-                    {(item: { key: string, email: string }) => (
-                        <TableRow key={item.key}>
+                    {(item: { id: number; name: string }) => (
+                        <TableRow key={item.id}>
                             {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
                         </TableRow>
                     )}
