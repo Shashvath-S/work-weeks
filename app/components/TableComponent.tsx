@@ -2,25 +2,23 @@
 import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@heroui/table";
 
 export interface iUser {
-    id: number,
-    name: string,
-    role: string
+    id: number;
+    name: string;
+    role?: string;
 }
 
-export default function EmployeeTable({ columns, rows }: {
+export default function TableComponent(props: {
     columns: { key: string, label: string }[],
     rows: iUser[]
 }) {
-    console.log("EmployeeTable: ")
-    console.log("Columns:", columns);
-    console.log("Rows:", rows);
+
     return (
         <div>
-            <Table aria-label="Employee Table">
-                <TableHeader columns={columns}>
+            <Table aria-label="Table Component">
+                <TableHeader columns={props.columns}>
                     {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
                 </TableHeader>
-                <TableBody items={rows}>
+                <TableBody items={props.rows}>
                     {(item: { id: number; name: string }) => (
                         <TableRow key={item.id}>
                             {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
