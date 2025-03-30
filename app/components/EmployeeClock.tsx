@@ -1,21 +1,37 @@
 "use client";
 
-import { signOut } from 'next-auth/react';
-import React, { useState } from 'react';
+import {signOut} from 'next-auth/react';
+import React, {useState} from 'react';
 
-export default function EmployeeClock () {
+export default function EmployeeClock({email}: { email: string }) {
+
+    async function postTimesheet() {
+        const lci = new Date(clockInTime)
+        const lco = new Date(clockOutTime)
+        if (submitted) {
+            const timesheetPost = await fetch("../../api/employees/timesheet", {
+                method: "POST",
+                body: JSON.stringify({
+                    latest_clock_in: lci,
+                    latest_clock_out: lco,
+                    total: lco.getTime() - lci.getTime(),
+                    email: email,
+                }),
+            })
+            console.log(timesheetPost)
+        }
+    }
 
     const [clockInTime, setClockInTime] = useState("");
     const [clockOutTime, setClockOutTime] = useState("");
     const [submitted, setSubmitted] = useState(false);
-    const now = new Date();
 
     return (
-        <div className="flex items-center justify-center h-screen" style={{ margin: "0 10px 0 10px" }}>
+        <div className="flex items-center justify-center h-screen" style={{margin: "0 10px 0 10px"}}>
             <div className="w-full">
                 <div className="text-center mb-4">
                     <h1 className="text-4xl font-bold">Work Weeks</h1>
-                    <button onClick={() => signOut({ callbackUrl: "/" })} className="btn btn-primary">Sign Out</button>
+                    <button onClick={() => signOut({callbackUrl: "/"})} className="btn btn-primary">Sign Out</button>
                 </div>
                 <div className="flex flex-col space-y-4 w-full">
                     <div className="flex space-x-4 justify-center">
@@ -23,7 +39,7 @@ export default function EmployeeClock () {
                             <button
                                 className="h-full w-full"
                                 disabled={clockInTime != ""}
-                                onClick={() => setClockInTime(now.toLocaleTimeString())}
+                                onClick={() => setClockInTime(new Date().toISOString())}
                             >
                                 Clock In
                             </button>
@@ -32,7 +48,7 @@ export default function EmployeeClock () {
                             <button
                                 className="h-full w-full"
                                 disabled={clockOutTime != "" || clockInTime == ""}
-                                onClick={() => setClockOutTime(now.toLocaleTimeString())}
+                                onClick={() => setClockOutTime(new Date().toISOString())}
                             >
                                 Clock Out
                             </button>
@@ -65,8 +81,11 @@ export default function EmployeeClock () {
                         }}
                     >
                         <button
-                            disabled={clockOutTime == ""}
-                            onClick={() => setSubmitted(true)}
+                            disabled={submitted}
+                            onClick={() => {
+                                setSubmitted(true);
+                                postTimesheet()
+                            }}
                             className="h-full w-full"
                         >
                             Submit Timesheet for Day

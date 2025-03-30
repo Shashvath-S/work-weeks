@@ -14,8 +14,8 @@ export default function TableComponent({columns, rows}: {
                 </TableHeader>
                 <TableBody items={rows}>
 
-                    {/* No matter what, the items array we pass in will have an id value for each value so we should
-                     be good for this*/
+                    {/*No matter what, the items array we pass in will have an id value for each value so we should
+                     be good for this */
                         (item) => (
                             <TableRow key={item.id}>
                                 {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}

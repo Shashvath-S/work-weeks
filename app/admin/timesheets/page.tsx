@@ -11,15 +11,11 @@ const columns = [
         label: "ROLE",
     },
     {
-        key: "day",
-        label: "DAY",
-    },
-    {
-        key: "start",
+        key: "latest_clock_in",
         label: "START TIME",
     },
     {
-        key: "end",
+        key: "latest_clock_out",
         label: "END TIME",
     },
     {
@@ -31,15 +27,20 @@ const columns = [
 interface timesheet {
     name: string,
     role: string,
-    day?: Date,
-    start?: number,
-    end?: number,
+    latest_clock_in?: Date,
+    latest_clock_out?: Date,
     total?: number,
 }
 
 export default function Page() {
-    const getUsers: timesheet[] = db.prepare("SELECT * FROM employees").all() as timesheet[];
-
+    const getUsers: timesheet[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total FROM employees").all() as timesheet[];
+    for (let i = 0; i < getUsers.length; i += 1) {
+        if (getUsers[i].total !== undefined) {
+            // @ts-expect-error idk why it says object is possibly null, it isn't, like I literally just checked if
+            // it was undefined in the if statement
+            getUsers[i].total = getUsers[i].total / 1000 / 60 / 60
+        }
+    }
     return (
         <div className="px-4 py-4">
             <TableComponent columns={columns} rows={getUsers}/>
