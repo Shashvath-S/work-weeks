@@ -1,9 +1,10 @@
 'use client'
 import {getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@heroui/table";
+import { iUser } from "../admin/employees/view/page";
 
 export default function TableComponent({columns, rows}: {
     columns: { key: string, label: string }[],
-    rows: unknown[],
+    rows: iUser[],
 }) {
 
     return (
