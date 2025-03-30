@@ -15,7 +15,10 @@ const columns = [
 export interface iUser {
     id: number;
     name: string;
-    role?: string;
+    role: string;
+    latest_clock_in?: Date;
+    latest_clock_out?: Date;
+    total?: number;
 }
 
 export default async function Page() {

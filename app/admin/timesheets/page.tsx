@@ -1,5 +1,6 @@
 import TableComponent from "@/app/components/TableComponent";
 import db from "@/app/lib/db";
+import {iUser} from "@/app/admin/employees/view/page";
 
 const columns = [
     {
@@ -24,16 +25,8 @@ const columns = [
     },
 ];
 
-interface timesheet {
-    name: string,
-    role: string,
-    latest_clock_in?: Date,
-    latest_clock_out?: Date,
-    total?: number,
-}
-
 export default function Page() {
-    const getUsers: timesheet[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total FROM employees").all() as timesheet[];
+    const getUsers: iUser[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total FROM employees").all() as iUser[];
     for (let i = 0; i < getUsers.length; i += 1) {
         if (getUsers[i].total !== undefined) {
             // @ts-expect-error idk why it says object is possibly null, it isn't, like I literally just checked if
