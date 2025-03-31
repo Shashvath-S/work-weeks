@@ -62,7 +62,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 height: "50px",
                             }}
                         >
-                            {clockInTime != "" && <p>Clocked In at {clockInTime}</p>}
+                            {clockInTime != "" && <p>Clocked In at {new Date(clockInTime).toLocaleTimeString()}</p>}
                         </div>
                         <div
                             className="p-4 w-1/2 text-center rounded-lg"
@@ -71,7 +71,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 height: "50px",
                             }}
                         >
-                            {clockOutTime != "" && <p>Clocked Out at {clockOutTime}</p>}
+                            {clockOutTime != "" && <p>Clocked Out at {new Date(clockOutTime).toLocaleTimeString()}</p>}
                         </div>
                     </div>
                     <div

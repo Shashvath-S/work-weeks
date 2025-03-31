@@ -10,5 +10,5 @@ export default async function Page() {
         redirect("/");
     }
     console.log(session.user.email);
-    return <EmployeeClock name={session.user.email}/>
+    return <EmployeeClock email={session.user.email}/>
 }
