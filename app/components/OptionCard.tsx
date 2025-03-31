@@ -28,7 +28,7 @@ export default function OptionCard({title, link}: { title: string, link: string 
                     >
                         <a
                             style={{borderColor: "black"}}
-                            href="employees/create"
+                            href={`${link}/create`}
                             type="button"
                             className="btn"
                         >
@@ -38,7 +38,7 @@ export default function OptionCard({title, link}: { title: string, link: string 
                             style={{borderColor: "black", marginLeft: 8}}
                             type="button"
                             className="btn"
-                            href={link}
+                            href={`${link}/view`}
                         >
                             View
                         </a>

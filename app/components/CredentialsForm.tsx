@@ -11,6 +11,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
 }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [checkPassword, setCheckPassword] = useState('');
     const [name, setName] = useState('');
     const [error, setError] = useState('');
 
@@ -56,19 +57,26 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                     {!isLoginForm &&
                         <>
                             <h3 className={"text-xl"}> Name: </h3>
-                            <input aria-label={"nameInput"} type={"text"} value={name}
+                            <input required aria-label={"nameInput"} type={"text"} value={name}
                                    className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"}
                                    onChange={(event) => setName(event.target.value)}/>
                         </>
                     }
                     <h3 className={"text-xl"}> Email: </h3>
-                    <input aria-label={"userNameInput"} value={email}
+                    <input required aria-label={"userNameInput"} value={email}
                            className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 p-2 bg-sky-100"}
                            onChange={(event) => setEmail(event.target.value)}/>
                     <h3 className={"text-xl"}> Password: </h3>
-                    <input aria-label={"passwordInput"} type={"password"} value={password}
+                    <input required aria-label={"passwordInput"} type={"password"} value={password}
                            className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"}
                            onChange={(event) => setPassword(event.target.value)}/>
+                    {!isLoginForm &&
+                    <>
+                    <h3 className={"text-xl"}> Confirm Password: </h3>
+                    <input required aria-label={"nameInput"} type={"password"} value={checkPassword} className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"} onChange={(event) => setCheckPassword(event.target.value)} />
+                    {(checkPassword != password && password != "") && <p>Passwords do not match</p> }
+                    </> 
+                    }
                     <button type="submit" className={"mb-2 rounded-3xl bg-sky-300 hover:bg-sky-500 p-2 w-1/2"}> Submit
                     </button>
                     <div>
