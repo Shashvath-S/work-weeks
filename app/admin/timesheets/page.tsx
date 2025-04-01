@@ -26,10 +26,10 @@ const columns = [
 ];
 
 export default function Page() {
-    const getUsers: iUser[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total FROM employees").all() as iUser[];
+    const getUsers: iUser[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total_hours FROM employees").all() as iUser[];
     for (let i = 0; i < getUsers.length; i += 1) {
         if (getUsers[i].total !== undefined) {
-            // @ts-expect-error idk why it says object is possibly null, it isn't, like I literally just checked if
+            // @ts-expect-error IDK why it says object is possibly null, it isn't, like I literally just checked if
             // it was undefined in the if statement
             getUsers[i].total = getUsers[i].total / 1000 / 60 / 60
         }
