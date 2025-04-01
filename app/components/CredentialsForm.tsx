@@ -9,11 +9,8 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
     isAdmin: boolean,
     backendSession: any
 }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [checkPassword, setCheckPassword] = useState('');
-    const [name, setName] = useState('');
     const [error, setError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const {data: clientSession} = useSession();
 
@@ -25,6 +22,10 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
 
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const formData = new FormData(e.currentTarget)
+        const email = formData.get("email");
+        const password = formData.get("password");
         const res = await signIn("credentials", {email, password, redirect: false});
         if (res && !res.ok) {
             setError(res.error as string)
@@ -36,54 +37,178 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
     const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await fetch("/api/register", {
-            method: "POST",
-            body: JSON.stringify({name, email, password, isAdmin})
-        })
 
-        if (response.ok) {
-            const signInResponse = await signIn("credentials", {
-                email, password, redirect: false
+        const formData = new FormData(e.currentTarget)
+        const firstName = formData.get("firstName") as string;
+        const lastName = formData.get("lastName") as string;
+        const name = firstName.trim() + " " + lastName.trim();
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const checkPassword = formData.get("checkPassword");
+
+        if (password != checkPassword) {
+            setPasswordError("Passwords do not match")
+        } else {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                body: JSON.stringify({name, email, password, isAdmin})
             })
+    
+            if (response.ok) {
+                const signInResponse = await signIn("credentials", {
+                    email, password, redirect: false
+                })
+            }
         }
     }
 
     return (
-        <div
-            className={"bg-center justify-center justify-items-center bg-[color()] text-center grid grid-flow-row auto-rows-max grow min-w-full items-center place-content-center h-dvh bg-cover"}>
-            <h1 className={"text-4xl mt-4 mb-4"}>{isLoginForm ? "Log in" : "Register"}</h1>
-            <div className={"border-4 border-gray-500 rounded-lg max-w-5xl"}>
-                <form onSubmit={isLoginForm ? handleLogin : handleRegister}>
-                    {!isLoginForm &&
-                        <>
-                            <h3 className={"text-xl"}> Name: </h3>
-                            <input required aria-label={"nameInput"} type={"text"} value={name}
-                                   className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"}
-                                   onChange={(event) => setName(event.target.value)}/>
-                        </>
-                    }
-                    <h3 className={"text-xl"}> Email: </h3>
-                    <input required aria-label={"userNameInput"} value={email}
-                           className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 p-2 bg-sky-100"}
-                           onChange={(event) => setEmail(event.target.value)}/>
-                    <h3 className={"text-xl"}> Password: </h3>
-                    <input required aria-label={"passwordInput"} type={"password"} value={password}
-                           className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"}
-                           onChange={(event) => setPassword(event.target.value)}/>
-                    {!isLoginForm &&
-                    <>
-                    <h3 className={"text-xl"}> Confirm Password: </h3>
-                    <input required aria-label={"nameInput"} type={"password"} value={checkPassword} className={"rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"} onChange={(event) => setCheckPassword(event.target.value)} />
-                    {(checkPassword != password && password != "") && <p>Passwords do not match</p> }
-                    </> 
-                    }
-                    <button type="submit" className={"mb-2 rounded-3xl bg-sky-300 hover:bg-sky-500 p-2 w-1/2"}> Submit
-                    </button>
-                    <div>
-                        {error === 'User does not exist. Please Register' ? 'This user does not exist' : ""}
+        <div className="container-fluid">
+        <div className="row">
+          <div
+            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
+          >
+            {/* <Image
+              priority
+              style={{ width: windowWidth < 998 ? "70%" : "90%", height: "auto" }}
+              src={logo}
+              alt="Whole Health Logo"
+            /> */}
+          </div>
+          <div
+            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
+          >
+            <h3 style={{fontSize: "150%"}}>
+              {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
+            </h3>
+            <div className="customFormContainer">
+              <form
+                className="customFormFormat"
+                onSubmit={!isLoginForm ? handleRegister : handleLogin}
+              >
+                {!isLoginForm && (
+                  <>
+                    <div className="mb-3">
+                      <label htmlFor="firstNameInput" className="form-label">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Enter First Name"
+                        className="form-control"
+                        id="firstNameInput"
+                        name="firstName"
+                        aria-describedby="emailHelp"
+                        required
+                      />
                     </div>
-                </form>
+                    <div className="mb-3">
+                      <label htmlFor="lastNameInput" className="form-label">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Enter Last Name"
+                        className="form-control"
+                        id="lastNameInput"
+                        name="lastName"
+                        aria-describedby="emailHelp"
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+                <div className="mb-3">
+                  <label htmlFor="emailInput" className="form-label">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter email"
+                    className="form-control"
+                    id="emailInput"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                  {error != "" && (
+                    <div
+                      style={{ color: "red" }}
+                      id="emailHelp"
+                      className="form-text text-center"
+                    >
+                      {!isLoginForm
+                        ? "Account already exists. Please Login"
+                        : "Account does not exist. Please Register"}
+                    </div>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="passwordInput" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter password"
+                    className="form-control"
+                    id="passwordInput"
+                    name="password"
+                    required
+                  />
+                </div>
+                {!isLoginForm && (
+                    <div className="mb-3">
+                    <label htmlFor="checkPasswordInput" className="form-label">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Enter password"
+                      className="form-control"
+                      id="checkPasswordInput"
+                      name="checkPassword"
+                      required
+                    />
+                      {(passwordError != "" && !isLoginForm) && (
+                      <div
+                        style={{ color: "red" }}
+                        id="emailHelp"
+                        className="form-text text-center"
+                      >
+                          Passwords do not match
+                      </div>
+                    )}
+                  </div>
+                )}
+                {!isLoginForm ? (
+                  <>
+                    <div id="loginHelp" className="form-text">
+                      Already have an account? <a style={{color: "blue", textDecoration: "underline"}} href="login">Login</a>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary formBtn"
+                    >
+                      Register
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div id="registerHelp" className="form-text">
+                      Don't have an account? <a style={{color: "blue", textDecoration: "underline"}} href="register">Register</a>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                    >
+                      Login
+                    </button>
+                  </>
+                )}
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     );
 }
