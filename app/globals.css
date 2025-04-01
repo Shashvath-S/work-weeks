@@ -20,3 +20,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
 }
+
+.inventoryForm {
+  padding: 0 20%;
+}
+
+.inventoryForm > * {
+  margin-bottom: 16px;
+}

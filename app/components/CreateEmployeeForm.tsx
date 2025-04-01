@@ -10,7 +10,7 @@ import {
     Button,
 } from "@heroui/react";
 
-export default function CreateEmployeeForm() {
+export default function CreateEmployeeForm({id} : {id:number}) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
@@ -20,7 +20,7 @@ export default function CreateEmployeeForm() {
 
         await fetch("/api/employees/create", {
             method: "POST",
-            body: JSON.stringify({name, email, role}),
+            body: JSON.stringify({name, email, role, id}),
         });
 
         redirect("/admin/home");

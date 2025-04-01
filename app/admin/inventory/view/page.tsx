@@ -4,22 +4,43 @@ import db from "@/app/lib/db";
 
 const columns = [
     {
-        key: "name",
-        label: "NAME",
+        key: "itemID",
+        label: "ITEM ID",
     },
     {
-        key: "role",
-        label: "ROLE",
+        key: "itemName",
+        label: "ITEM NAME",
+    },
+    {
+        key: "category",
+        label: "CATEGORY",
+    },
+    {
+        key: "quantityInStock",
+        label: "QUANTITY IN STOCK",
+    },
+    {
+        key: "reorderLevel",
+        label: "REORDER LEVEL",
+    },
+    {
+        key: "unitPrice",
+        label: "UNIT PRICE",
+    },
+    {
+        key: "supplier",
+        label: "SUPPLIER",
+    },
+    {
+        key: "lastUpdated",
+        label: "LAST UPDATED",
     },
 ];
 
 export interface iUser {
     id: number;
     name: string;
-    role: string;
-    latest_clock_in?: Date;
-    latest_clock_out?: Date;
-    total?: number;
+    role?: string;
 }
 
 export default async function Page() {
@@ -29,7 +50,7 @@ export default async function Page() {
 
     return (
         <div className="px-4 py-4 rounded-lg mx-2">
-            <AdminTopTitle title="Employees" link="create" />
+            <AdminTopTitle title="Inventory" link="create" />
             <EmployeeTable columns={columns} rows={rows}/>
         </div>
     );
