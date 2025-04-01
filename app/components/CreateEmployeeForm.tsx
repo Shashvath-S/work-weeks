@@ -17,7 +17,7 @@ export default function CreateEmployeeForm({id} : {id:number}) {
 
     const createEmployee = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        console.log(name, email, role)
         await fetch("/api/employees/create", {
             method: "POST",
             body: JSON.stringify({name, email, role, id}),

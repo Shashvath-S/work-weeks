@@ -5,19 +5,47 @@ import React, {useState} from 'react';
 
 export default function EmployeeClock({email}: { email: string }) {
 
-    async function postTimesheet() {
+    async function postSubmit() {
+        setSubmitted(true)
         const lci = new Date(clockInTime)
         const lco = new Date(clockOutTime)
         const timesheetPost = await fetch("../../api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
-                latest_clock_in: lci,
-                latest_clock_out: lco,
-                total: lco.getTime() - lci.getTime(),
+                clockInOutSubmit: "submit",
+                time: (lco.getTime() - lci.getTime())/1000,
                 email: email,
             }),
         })
         console.log(timesheetPost)
+    }
+
+    async function postClockIn() {
+        setClockInTime(new Date().toISOString())
+        const lci = new Date(clockInTime)
+        const clockInPost = await fetch("../../api/employees/timesheet", {
+            method: "POST",
+            body: JSON.stringify({
+                clockInOutSubmit: "clockIn",
+                time: lci,
+                email: email,
+            })
+        })
+        console.log(clockInPost)
+    }
+
+    async function postClockOut() {
+        setClockOutTime(new Date().toISOString())
+        const lco = new Date(clockOutTime)
+        const clockOutPost = await fetch("../../api/employees/timesheet", {
+            method: "POST",
+            body: JSON.stringify({
+                clockInOutSubmit: "clockOut",
+                time: lco,
+                email: email,
+            })
+        })
+        console.log(clockOutPost)
     }
 
     const [clockInTime, setClockInTime] = useState("");
@@ -37,7 +65,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             <button
                                 className="h-full w-full"
                                 disabled={clockInTime != ""}
-                                onClick={() => setClockInTime(new Date().toISOString())}
+                                onClick={() => {postClockIn()}}
                             >
                                 Clock In
                             </button>
@@ -46,7 +74,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             <button
                                 className="h-full w-full"
                                 disabled={clockOutTime != "" || clockInTime == ""}
-                                onClick={() => setClockOutTime(new Date().toISOString())}
+                                onClick={() => postClockOut()}
                             >
                                 Clock Out
                             </button>
@@ -79,11 +107,11 @@ export default function EmployeeClock({email}: { email: string }) {
                         }}
                     >
                         <button
-                            disabled={submitted}
+
                             onClick={() => {
-                                setSubmitted(true);
-                                postTimesheet()
+                                postSubmit()
                             }}
+
                             className="h-full w-full"
                         >
                             {/*disabled={submitted}*/}
