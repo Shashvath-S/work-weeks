@@ -1,6 +1,7 @@
 import AdminTopTitle from "@/app/components/AdminTopTitle";
 import EmployeeTable from "@/app/components/TableComponent";
 import db from "@/app/lib/db";
+import {iUser} from "@/app/admin/employees/view/page";
 
 const columns = [
     {
@@ -36,12 +37,6 @@ const columns = [
         label: "LAST UPDATED",
     },
 ];
-
-export interface iUser {
-    id: number;
-    name: string;
-    role?: string;
-}
 
 export default async function Page() {
     const rows: iUser[] = db.prepare(`SELECT id, name, role

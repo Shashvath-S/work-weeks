@@ -26,14 +26,15 @@ export default function OptionCard({title, link}: { title: string, link: string 
                         className="flex flex-row place-content-center mt-auto"
                         style={{marginBottom: 20}}
                     >
-                        <a
+                        { title!=="Timesheets" &&
+                            <a
                             style={{borderColor: "black"}}
                             href={`${link}/create`}
                             type="button"
                             className="btn"
                         >
                             Create
-                        </a>
+                        </a>}
                         <a
                             style={{borderColor: "black", marginLeft: 8}}
                             type="button"

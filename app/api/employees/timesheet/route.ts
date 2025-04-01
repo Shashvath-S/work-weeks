@@ -1,21 +1,18 @@
 import db from "@/app/lib/db";
 
 export async function POST(req: Request) {
-    const {lci, lco, total, email} = await req.json()
-    console.log(lci, lco, total, email)
-    let getCurrentTotal;
-    if (new Date(lci).getDay() !== 1) { // Reset the total every monday so we aren't tracking last week's numbers.
-        getCurrentTotal = db.prepare(`SELECT total
-                                      from employees
-                                      WHERE email = ${email}`).get()
-    } else {
-        getCurrentTotal = 0
+    const {clockInOutSubmit, time, email} = await req.json();
+    if (!time) {
+        return Response.json({err: "Time was null", succeeded: false});
     }
-
-    const postTimesheet = db.prepare(`UPDATE employees
-                                      SET latest_clock_in=${lci},
-                                          latest_clock_out=${lco},
-                                          total=${total + getCurrentTotal}
-                                      WHERE email = ${email}`).run()
-    console.log(postTimesheet)
+    if (clockInOutSubmit === 'clockIn') {
+        db.prepare(`UPDATE employees SET latest_clock_in = ? WHERE email = ?`).run(time, email)
+        return Response.json({res: "Clocked In"})
+    } else if (clockInOutSubmit === 'clockOut') {
+        db.prepare(`UPDATE employees SET latest_clock_out = ? WHERE email = ?`).run(time, email)
+        return Response.json({res: "Clocked Out"})
+    } else if (clockInOutSubmit === 'submit') {
+        db.prepare(`UPDATE employees SET total_hours = ? WHERE email = ?`).run(time, email)
+        return Response.json({res: "Submitted"})
+    }
 }
