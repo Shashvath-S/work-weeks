@@ -12,6 +12,7 @@ export default function AdminTopTitle({ title, link } : { title: string, link: s
         marginBottom: 30,
       }}
     >
+      {title != "Work Weeks"&& <a className="btn btn-primary absolute top-2 left-2" href="/admin/home">Home</a>}
       <h1
         style={{
           fontSize: "200%",

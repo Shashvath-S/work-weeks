@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <div>
-      <div style={{ padding: "20px", width: "100%", height: "95vh" }}>
+      <div style={{ padding: "20px 20px 0 20px", width: "100%", height: "95vh" }}>
         <AdminTopTitle title="Work Weeks" link="" />
         <OptionCard title="Employees" link={"employees"} />
         <OptionCard title="Inventory" link={"inventory"} />
