@@ -14,16 +14,18 @@ export default function CreateEmployeeForm({id} : {id:number}) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
+    const [otp, setOtp] = useState("");
 
     const createEmployee = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const myOtp = (Math.random() * 1000000 - 1) as unknown as string
+        setOtp(myOtp);
+
         console.log(name, email, role)
         await fetch("/api/employees/create", {
             method: "POST",
-            body: JSON.stringify({name, email, role, id}),
+            body: JSON.stringify({name, email, role, id, myOtp}),
         });
-
-        redirect("/admin/home");
     };
 
     return (
@@ -73,6 +75,10 @@ export default function CreateEmployeeForm({id} : {id:number}) {
                     >
                         Submit
                     </button>
+
+                    <div>
+                        {otp && `Your otp is ${otp}`}
+                    </div>
                 </form>
             </div>
         </div>

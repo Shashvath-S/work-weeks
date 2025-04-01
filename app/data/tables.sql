@@ -9,6 +9,7 @@ CREATE TABLE employees
     latest_clock_out DATE,
     total_hours      INTEGER,
     admin_id INTEGER,
+    otp INTEGER,
     FOREIGN KEY (admin_id) REFERENCES admin(id) ON DELETE CASCADE
 );
 
