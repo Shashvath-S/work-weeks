@@ -21,6 +21,7 @@ export default function EmployeeClock({email}: { email: string }) {
     }
 
     async function postClockIn() {
+        console.log("post clockIn")
         setClockInTime(new Date().toISOString())
         const lci = new Date(clockInTime)
         const clockInPost = await fetch("../../api/employees/timesheet", {
@@ -64,18 +65,19 @@ export default function EmployeeClock({email}: { email: string }) {
                         <div className="bg-blue-500 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
-                                disabled={clockInTime != ""}
-                                onClick={() => {postClockIn()}}
+
+                                onClick={() => postClockIn}
                             >
+                                {/*disabled={clockInTime != ""}*/}
                                 Clock In
                             </button>
                         </div>
                         <div className="bg-green-500 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
-                                disabled={clockOutTime != "" || clockInTime == ""}
-                                onClick={() => postClockOut()}
+                                onClick={() => postClockOut}
                             >
+                                {/*disabled={clockOutTime != "" || clockInTime == ""}*/}
                                 Clock Out
                             </button>
                         </div>

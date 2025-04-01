@@ -9,7 +9,7 @@ export async function POST(req: Request) {
         db.prepare(`UPDATE employees SET latest_clock_out = ? WHERE email = ?`).run(time, email)
         return Response.json({res: "Clocked Out"})
     } else if (clockInOutSubmit === 'submit') {
-        db.prepare(`UPDATE employees SET total = ? WHERE email = ?`).run(time, email)
+        db.prepare(`UPDATE employees SET total_hours = ? WHERE email = ?`).run(time, email)
         return Response.json({res: "Submitted"})
     }
     /*
