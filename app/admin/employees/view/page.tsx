@@ -17,9 +17,9 @@ export interface iUser {
     id: number;
     name: string;
     role: string;
-    latest_clock_in?: Date;
-    latest_clock_out?: Date;
-    total?: number;
+    latest_clock_in?: Date | string;
+    latest_clock_out?: Date | string;
+    total_hours?: number;
 }
 
 export default async function Page() {
