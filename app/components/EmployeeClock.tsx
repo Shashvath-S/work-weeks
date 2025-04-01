@@ -8,18 +8,16 @@ export default function EmployeeClock({email}: { email: string }) {
     async function postTimesheet() {
         const lci = new Date(clockInTime)
         const lco = new Date(clockOutTime)
-        if (submitted) {
-            const timesheetPost = await fetch("../../api/employees/timesheet", {
-                method: "POST",
-                body: JSON.stringify({
-                    latest_clock_in: lci,
-                    latest_clock_out: lco,
-                    total: lco.getTime() - lci.getTime(),
-                    email: email,
-                }),
-            })
-            console.log(timesheetPost)
-        }
+        const timesheetPost = await fetch("../../api/employees/timesheet", {
+            method: "POST",
+            body: JSON.stringify({
+                latest_clock_in: lci,
+                latest_clock_out: lco,
+                total: lco.getTime() - lci.getTime(),
+                email: email,
+            }),
+        })
+        console.log(timesheetPost)
     }
 
     const [clockInTime, setClockInTime] = useState("");
@@ -62,7 +60,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 height: "50px",
                             }}
                         >
-                            {clockInTime != "" && <p>Clocked In at {clockInTime}</p>}
+                            {clockInTime != "" && <p>Clocked In at {new Date(clockInTime).toLocaleTimeString()}</p>}
                         </div>
                         <div
                             className="p-4 w-1/2 text-center rounded-lg"
@@ -71,7 +69,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 height: "50px",
                             }}
                         >
-                            {clockOutTime != "" && <p>Clocked Out at {clockOutTime}</p>}
+                            {clockOutTime != "" && <p>Clocked Out at {new Date(clockOutTime).toLocaleTimeString()}</p>}
                         </div>
                     </div>
                     <div
@@ -88,6 +86,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             }}
                             className="h-full w-full"
                         >
+                            {/*disabled={submitted}*/}
                             Submit Timesheet for Day
                         </button>
                     </div>
