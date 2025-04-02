@@ -1,4 +1,5 @@
-import SignOutButton from "./SignOutButton";
+import {SignOutButton, HomeButton} from "./Buttons";
+
 
 export default function AdminTopTitle({ title, link } : { title: string, link: string }) {
   return (
@@ -12,6 +13,7 @@ export default function AdminTopTitle({ title, link } : { title: string, link: s
         marginBottom: 30,
       }}
     >
+      {title != "Work Weeks"&& <HomeButton />}
       <h1
         style={{
           fontSize: "200%",
@@ -22,7 +24,7 @@ export default function AdminTopTitle({ title, link } : { title: string, link: s
       >
         {title}
       </h1>
-      {link != "" && <a className="btn btn-primary absolute bottom-5" href={link}>{link.charAt(0).toUpperCase() + link.substring(1)}</a>}
+      {link != "" && <a style={{borderRadius: "15px"}} className="btn btn-primary absolute bottom-5" href={link}>{link.charAt(0).toUpperCase() + link.substring(1)}</a>}
       <SignOutButton />
     </div>
   );

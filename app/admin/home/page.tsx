@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/AuthOptions";
 import AdminTopTitle from "@/app/components/AdminTopTitle";
 import OptionCard from "@/app/components/OptionCard";
 import { getServerSession } from "next-auth";
@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <div>
-      <div style={{ padding: "20px", width: "100%", height: "95vh" }}>
+      <div style={{ padding: "20px 20px 0 20px", width: "100%", height: "95vh" }}>
         <AdminTopTitle title="Work Weeks" link="" />
         <OptionCard title="Employees" link={"employees"} />
         <OptionCard title="Inventory" link={"inventory"} />

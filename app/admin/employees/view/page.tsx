@@ -1,6 +1,8 @@
 import AdminTopTitle from "@/app/components/AdminTopTitle";
 import EmployeeTable from "@/app/components/TableComponent";
+import { authOptions } from "@/app/lib/AuthOptions";
 import db from "@/app/lib/db";
+import { getServerSession } from "next-auth";
 
 const columns = [
     {
@@ -23,7 +25,10 @@ export interface iUser {
 }
 
 export default async function Page() {
-    const rows: iUser[] = db.prepare(`SELECT id, name, role FROM employees`).all() as iUser[];
+
+    const session = await getServerSession(authOptions);
+
+    const rows: iUser[] = await db`SELECT id, name, role FROM employees WHERE admin_id = ${session?.user.id}` as iUser[];
     console.log(rows);
     return (
         <div className="px-4 py-4 rounded-lg mx-2">

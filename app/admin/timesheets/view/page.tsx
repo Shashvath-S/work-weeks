@@ -25,8 +25,8 @@ const columns = [
     },
 ];
 
-export default function Page() {
-    const getUsers: iUser[] = db.prepare("SELECT id, name, role, latest_clock_in, latest_clock_out, total_hours FROM employees").all() as iUser[];
+export default async function Page() {
+    const getUsers: iUser[] = await db`SELECT id, name, role, latest_clock_in, latest_clock_out, total_hours FROM employees` as iUser[];
     for (const row of getUsers) {
         row.latest_clock_in = new Date(row.latest_clock_in as Date).toLocaleString();
         row.latest_clock_out = new Date(row.latest_clock_out as Date).toLocaleString();

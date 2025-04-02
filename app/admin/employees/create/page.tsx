@@ -1,4 +1,5 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/AuthOptions";
+import AdminTopTitle from "@/app/components/AdminTopTitle";
 import CreateEmployeeForm from "@/app/components/CreateEmployeeForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -11,5 +12,10 @@ export default async function CreateEmployee() {
         redirect("/");
       }
 
-    return <CreateEmployeeForm id={session.user.id} />
+    return (
+      <div style={{ padding: "20px", width: "100%", height: "95vh" }}>
+        <AdminTopTitle title="Create Employee" link="view" />
+        <CreateEmployeeForm id={session.user.id} />
+      </div>
+    )
 }

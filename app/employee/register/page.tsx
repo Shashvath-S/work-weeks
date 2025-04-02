@@ -3,10 +3,13 @@
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
+import logo from "@/public/logo.png";
+import Image from "next/image";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [error, setError] = useState({ isError: false, errorMessage: "" });
 
@@ -20,6 +23,10 @@ export default function Register() {
     e: FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+
+    if (checkPassword != password) {
+      setError({ isError: true, errorMessage: "Passwords do not match" });
+    }
 
     const res = await fetch("api/employees/fetchOtp", {
       method: "POST",
@@ -51,52 +58,118 @@ export default function Register() {
   };
 
   return (
-    <div
-      className={
-        "bg-center justify-center justify-items-center bg-[color()] text-center grid grid-flow-row auto-rows-max grow min-w-full items-center place-content-center h-dvh bg-cover"
-      }
-    >
-      <h1 className={"text-4xl mt-4 mb-4"}>Register</h1>
-      <div className={"border-4 border-gray-500 rounded-lg max-w-5xl"}>
-        <form onSubmit={handleEmployeeRegisterPassword}>
-          <h3 className={"text-xl"}> Email: </h3>
-          <input
-            aria-label={"userNameInput"}
-            value={email}
-            className={
-              "rounded enabled:hover:bg-sky-200 ml-2 mr-2 p-2 bg-sky-100"
-            }
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <h3 className={"text-xl"}> Setup Password: </h3>
-          <input
-            aria-label={"passwordInput"}
-            type={"password"}
-            value={password}
-            className={
-              "rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"
-            }
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          <h3 className={"text-xl"}> Enter One Time Password: </h3>
-          <input
-              aria-label={"passwordInput"}
-              type={"password"}
-              value={otp}
-              className={
-                "rounded enabled:hover:bg-sky-200 ml-2 mr-2 mb-2 p-2 bg-sky-100"
-              }
-              onChange={(event) => setOtp(event.target.value)}
-          />
-          {error.isError && <p>{error.errorMessage}</p>}
-          <button
-            type="submit"
-            className={"mb-2 rounded-3xl bg-sky-300 hover:bg-sky-500 p-2 w-1/2"}
+    <div className="container-fluid">
+        <div className="row">
+          <div
+            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
           >
-            Submit
-          </button>
-        </form>
+            <Image
+              priority
+              style={{ width: "90%", height: "auto" }}
+              src={logo}
+              alt="Whole Health Logo"
+              onClick={() => redirect("/")}
+            />
+          </div>
+          <div
+            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
+          >
+            <h3 style={{fontSize: "150%"}}>
+              Welcome to Work Weeks!
+            </h3>
+            <div className="customFormContainer">
+              <form
+                className="customFormFormat"
+                onSubmit={handleEmployeeRegisterPassword}
+              >
+                <div className="mb-3">
+                  <label htmlFor="emailInput" className="form-label">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter email"
+                    className="form-control"
+                    id="emailInput"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {error.isError && (
+                    <div
+                      style={{ color: "red" }}
+                      id="emailHelp"
+                      className="form-text text-center"
+                    >
+                      Account does not exist. Please contact admin.
+                    </div>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="passwordInput" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter password"
+                    className="form-control"
+                    id="passwordInput"
+                    name="password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                    <div className="mb-3">
+                    <label htmlFor="checkPasswordInput" className="form-label">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Confirm password"
+                      className="form-control"
+                      id="checkPasswordInput"
+                      name="checkPassword"
+                      required
+                      onChange={(e) => setCheckPassword(e.target.value)}
+                    />
+                      {(error.isError && error.errorMessage.split(" ")[0] == "Passwords") && (
+                      <div
+                        style={{ color: "red" }}
+                        id="emailHelp"
+                        className="form-text text-center"
+                      >
+                          Passwords do not match
+                      </div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                  <label htmlFor="otpInput" className="form-label">
+                    Enter One Time Passcode (OTP):
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter OTP"
+                    className="form-control"
+                    id="otpInput"
+                    name="password"
+                    required
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+                </div>
+                    <div id="loginHelp" className="form-text">
+                      Already have an account? <a style={{color: "blue", textDecoration: "underline"}} href="login">Login</a>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary formBtn"
+                    >
+                      Register
+                    </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   );
 }
