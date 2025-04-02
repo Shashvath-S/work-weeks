@@ -68,7 +68,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
         <div className="container-fluid">
         <div className="row">
           <div
-            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
+            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center bg-gradient-to-r from-green-600 to-blue-950`}
           >
             <Image
               priority
