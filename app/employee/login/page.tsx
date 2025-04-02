@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/AuthOptions";
 import CredentialsForm from "@/app/components/CredentialsForm";
 import { getServerSession } from "next-auth";
 

@@ -1,5 +1,4 @@
 import AdminTopTitle from "@/app/components/AdminTopTitle";
-import EmployeeTable from "@/app/components/TableComponent";
 import db from "@/app/lib/db";
 import { iUser } from "@/app/admin/employees/view/page";
 
@@ -51,12 +50,6 @@ export default async function Page() {
     currency: "USD",
   });
 
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
-  });
-
   return (
     <div className="px-4 py-4 rounded-lg mx-2">
       <AdminTopTitle title="Inventory" link="create" />
@@ -74,7 +67,6 @@ export default async function Page() {
         </thead>
         <tbody>
           {rows.map((row: any) => {
-            console;
             return (
               <tr key={row.id}>
                 <td>{row.id}</td>

@@ -57,7 +57,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
             })
     
             if (response.ok) {
-                const signInResponse = await signIn("credentials", {
+                await signIn("credentials", {
                     email, password, redirect: false
                 })
             }

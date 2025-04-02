@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/AuthOptions";
 import AdminTopTitle from "@/app/components/AdminTopTitle";
 import CreateEmployeeForm from "@/app/components/CreateEmployeeForm";
 import { getServerSession } from "next-auth";
