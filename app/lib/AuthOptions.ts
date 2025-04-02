@@ -23,16 +23,12 @@ export const authOptions: NextAuthOptions = {
         },
         async authorize(credentials) {
           let role;
-          let getUser: IUser[] = db
-            .prepare("SELECT * FROM admin WHERE email = ?")
-            .all(credentials?.email) as IUser[];
+          let getUser: IUser[] = await db`SELECT * FROM admin WHERE email = ${credentials?.email}` as IUser[];
   
           if (getUser.length > 0) {
             role = "admin";
           } else {
-            getUser = db
-            .prepare("SELECT * FROM employees WHERE email = ?")
-            .all(credentials?.email) as IUser[];
+            getUser = await db`SELECT * FROM employees WHERE email = ${credentials?.email}` as IUser[];
             if (getUser.length > 0) {
               role = "employee";
             } else {

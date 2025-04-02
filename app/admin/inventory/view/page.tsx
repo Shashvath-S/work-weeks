@@ -1,6 +1,8 @@
 import AdminTopTitle from "@/app/components/AdminTopTitle";
 import db from "@/app/lib/db";
 import { iUser } from "@/app/admin/employees/view/page";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/AuthOptions";
 
 const columns = [
   {
@@ -38,12 +40,11 @@ const columns = [
 ];
 
 export default async function Page() {
-  const rows: iUser[] = db
-    .prepare(
-      `SELECT id, name, category, quantity, reorder, price, supplier, lastupdated
-                                      FROM inventory`
-    )
-    .all() as iUser[];
+
+  const session = await getServerSession(authOptions);
+
+  const rows: iUser[] = await db`SELECT id, name, category, quantity, reorder, price, supplier, lastupdated
+                                      FROM inventory WHERE admin_id = ${session?.user.id}` as iUser[];
 
   const currencyFormatter = Intl.NumberFormat("en-US", {
     style: "currency",
