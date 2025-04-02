@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #ffffff;
+:root {
+  --background: oklch(28.2% 0.091 267.935);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #ededed;
-  }
-} */
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #ffffff;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*} *!*/
 
 body {
   /* color: var(--foreground); */
