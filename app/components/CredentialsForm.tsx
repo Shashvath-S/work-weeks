@@ -85,7 +85,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                 className="customFormFormat"
                 onSubmit={!isLoginForm ? handleRegister : handleLogin}
               >
-                  <h3 style={{fontSize: "200%"}} className="text-5xl mb-8 font-bold font-sans tracking-[0.15em] text-blue-950 text-justify">
+                  <h3 style={{fontSize: "200%"}} className="text-5xl mb-8 font-bold font-sans tracking-[0.13em] text-blue-950 text-justify">
                       {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
                   </h3>
                 {!isLoginForm && (
