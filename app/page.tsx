@@ -1,3 +1,7 @@
+import logo from "@/public/logo.png";
+import Image from "next/image";
+import { redirect } from "next/navigation";
+
 export default async function Home() {
 
   return (
@@ -6,9 +10,11 @@ export default async function Home() {
         "bg-center justify-center justify-items-center bg-[color()] text-center grid grid-flow-row auto-rows-max grow min-w-full items-center place-content-center h-dvh bg-cover"
       }
     >
-      <h1 className={"text-4xl mt-4 mb-4"}>
-        Welcome to WorkWeeks!
-      </h1>
+      <Image
+        style={{ width: "90%", height: "auto" }}
+        src={logo}
+        alt="Whole Health Logo"
+      />
       <div className={"border-gray-500 rounded-lg max-w-5xl"}>
         <a href="/admin/login" className={"btn btn-primary ml-2 mr-2 p-2"}>
           Admin Login

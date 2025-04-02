@@ -14,8 +14,8 @@ export default async function CreateEmployee() {
 
     return (
       <div style={{ padding: "20px", width: "100%", height: "95vh" }}>
-      <AdminTopTitle title="Create Employee" link="view" />
-      <CreateEmployeeForm id={session.user.id} />
+        <AdminTopTitle title="Create Employee" link="view" />
+        <CreateEmployeeForm id={session.user.id} />
       </div>
     )
 }
