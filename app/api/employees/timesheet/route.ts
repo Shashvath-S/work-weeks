@@ -6,13 +6,13 @@ export async function POST(req: Request) {
         return Response.json({err: "Time was null", succeeded: false});
     }
     if (clockInOutSubmit === 'clockIn') {
-        db`UPDATE employees SET latest_clock_in = ${time} WHERE email = ${email}`
+        await db`UPDATE employees SET latest_clock_in = ${time} WHERE email = ${email}`
         return Response.json({res: "Clocked In"})
     } else if (clockInOutSubmit === 'clockOut') {
-        db`UPDATE employees SET latest_clock_out = ${time} WHERE email = ${email}`
+        await db`UPDATE employees SET latest_clock_out = ${time} WHERE email = ${email}`
         return Response.json({res: "Clocked Out"})
     } else if (clockInOutSubmit === 'submit') {
-        db`UPDATE employees SET total_hours = ${time} WHERE email = ${email}`
+        await db`UPDATE employees SET total_hours = ${time} WHERE email = ${email}`
         return Response.json({res: "Submitted"})
     }
 }
