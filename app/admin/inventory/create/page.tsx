@@ -1,7 +1,6 @@
 "use client";
 
 import AdminTopTitle from "@/app/components/AdminTopTitle";
-import { Form, Input, Button } from "@heroui/react";
 import { FormEvent, useState } from "react";
 
 export default function App() {
@@ -12,55 +11,20 @@ export default function App() {
   const [unitPrice, setUnitPrice] = useState("");
   const [supplier, setSupplier] = useState("");
 
-  // const array = [
-  //   {
-  //     name: "Item Name",
-  //     variable: itemName,
-  //     function: setItemName,
-  //   },
-  //   {
-  //     name: "Category",
-  //     variable: category,
-  //     function: setCategory,
-  //   },
-  //   {
-  //     name: "Quantity In Stock",
-  //     variable: quantityInStock,
-  //     function: setQuantityInStock,
-  //   },
-  //   {
-  //     name: "Reorder Level",
-  //     variable: reorderLevel,
-  //     function: setReorderLevel,
-  //   },
-  //   {
-  //     name: "Unit Price",
-  //     variable: unitPrice,
-  //     function: setUnitPrice,
-  //   },
-  //   {
-  //     name: "Supplier ID",
-  //     variable: supplier,
-  //     function: setSupplier,
-  //   },
-  // ];
-
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("no errors");
-
-    // await fetch("/api/inventory/create", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     itemName,
-    //     category,
-    //     quantityInStock,
-    //     reorderLevel,
-    //     unitPrice,
-    //     supplier,
-    //   }),
-    // });
+    await fetch("/api/inventory/create", {
+      method: "POST",
+      body: JSON.stringify({
+        itemName,
+        category,
+        quantityInStock,
+        reorderLevel,
+        unitPrice,
+        supplier,
+      }),
+    });
   };
 
   return (

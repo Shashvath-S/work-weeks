@@ -3,6 +3,8 @@
 import {FormEvent, useState} from "react";
 import {signIn, useSession} from "next-auth/react";
 import {redirect} from "next/navigation";
+import logo from "@/public/logo.png";
+import Image from "next/image";
 
 export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: {
     isLoginForm: boolean,
@@ -68,12 +70,12 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
           <div
             className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
           >
-            {/* <Image
+            <Image
               priority
-              style={{ width: windowWidth < 998 ? "70%" : "90%", height: "auto" }}
+              style={{ width: "90%", height: "auto" }}
               src={logo}
               alt="Whole Health Logo"
-            /> */}
+            />
           </div>
           <div
             className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
