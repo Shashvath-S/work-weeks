@@ -12,9 +12,7 @@ interface IEmployeeCred {
 export async function PUT (request: NextRequest) {
   const { email, password } = await request.json();
 
-  const checkEmail: IEmployeeCred[] = db
-    .prepare(`SELECT * FROM employees WHERE email = ?`)
-    .all(email) as IEmployeeCred[];
+  const checkEmail: IEmployeeCred[] = await db`SELECT * FROM employees WHERE email = ${email}` as IEmployeeCred[];
 
   console.log(checkEmail)
 
@@ -29,9 +27,7 @@ export async function PUT (request: NextRequest) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
   
-      db.prepare(
-        `UPDATE employees SET password = ? WHERE email = ?`
-      ).run(hashedPassword, email);
+      await db`UPDATE employees SET password = ${hashedPassword} WHERE email = ${email}`;
   
       return NextResponse.json({ message: "All good" });
     } else {

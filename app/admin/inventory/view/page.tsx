@@ -38,12 +38,8 @@ const columns = [
 ];
 
 export default async function Page() {
-  const rows: iUser[] = db
-    .prepare(
-      `SELECT id, name, category, quantity, reorder, price, supplier, lastupdated
-                                      FROM inventory`
-    )
-    .all() as iUser[];
+  const rows: iUser[] = await db`SELECT id, name, category, quantity, reorder, price, supplier, lastupdated
+                                      FROM inventory` as iUser[];
 
   const currencyFormatter = Intl.NumberFormat("en-US", {
     style: "currency",
