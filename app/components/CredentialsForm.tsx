@@ -74,7 +74,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
               priority
               style={{ width: "90%", height: "auto" }}
               src={logo}
-              alt="Whole Health Logo"
+              alt="Work Weeks Logo"
             />
           </div>
           <div

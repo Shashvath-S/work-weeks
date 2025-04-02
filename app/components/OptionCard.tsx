@@ -1,3 +1,9 @@
+"use client";
+
+import PersonIcon from '@mui/icons-material/Person';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+
 export default function OptionCard({
   title,
   link,
@@ -22,8 +28,13 @@ export default function OptionCard({
             height: "100%",
             backgroundColor: "rgb(185, 187, 190)",
             borderRadius: 20,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        ></div>
+        >
+          {title == "Employees" ? <PersonIcon style={{ fontSize: 96, color: "white" }} /> : title == "Inventory" ? <Inventory2Icon style={{ fontSize: 96, color: "white" }} /> : <EventNoteIcon style={{ fontSize: 96, color: "white" }} /> }
+        </div>
         <div className="flex flex-col" style={{ width: "12%" }}>
           <h1 style={{ fontSize: "200%", fontWeight: "bold", marginLeft: 20 }}>
             {title}
