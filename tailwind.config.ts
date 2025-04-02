@@ -13,6 +13,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        radialGradient: 'radial-gradient(var(--tw-gradient-stops))',
+      }
     },
   },
   darkMode: "class",

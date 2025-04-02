@@ -78,26 +78,26 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
             />
           </div>
           <div
-            className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
+            className={`col w-100 vh-100 d-flex flex-column justify-content-center align-items-center`}
           >
-            <h3 style={{fontSize: "200%"}} className="text-5xl mb-4 font-bold font-sans tracking-wider text-blue-950">
-              {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
-            </h3>
-            <div className="customFormContainer">
+            <div className="w-3/4">
               <form
                 className="customFormFormat"
                 onSubmit={!isLoginForm ? handleRegister : handleLogin}
               >
+                  <h3 style={{fontSize: "200%"}} className="text-5xl mb-8 font-bold font-sans tracking-[0.15em] text-blue-950 text-justify">
+                      {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
+                  </h3>
                 {!isLoginForm && (
                   <>
                     <div className="mb-3">
-                      <label htmlFor="firstNameInput" className="form-label">
+                      <label htmlFor="firstNameInput" className="form-label font-bold">
                         First Name
                       </label>
                       <input
                         type="text"
                         placeholder="Enter First Name"
-                        className="form-control"
+                        className="form-control font-bold"
                         id="firstNameInput"
                         name="firstName"
                         aria-describedby="emailHelp"
@@ -105,7 +105,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="lastNameInput" className="form-label">
+                      <label htmlFor="lastNameInput" className="form-label font-bold">
                         Last Name
                       </label>
                       <input
@@ -121,7 +121,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                   </>
                 )}
                 <div className="mb-3">
-                  <label htmlFor="emailInput" className="form-label">
+                  <label htmlFor="emailInput" className="form-label font-bold">
                     Email Address
                   </label>
                   <input
@@ -137,7 +137,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                     <div
                       style={{ color: "red" }}
                       id="emailHelp"
-                      className="form-text text-center"
+                      className="form-text text-center font-bold"
                     >
                       {!isLoginForm
                         ? "Account already exists. Please Login"
@@ -146,7 +146,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                   )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="passwordInput" className="form-label">
+                  <label htmlFor="passwordInput" className="form-label font-bold">
                     Password
                   </label>
                   <input
@@ -175,7 +175,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                       <div
                         style={{ color: "red" }}
                         id="emailHelp"
-                        className="form-text text-center"
+                        className="form-text text-center font-bold"
                       >
                           Passwords do not match
                       </div>
@@ -184,28 +184,28 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                 )}
                 {!isLoginForm ? (
                   <>
-                    <div id="loginHelp" className="form-text">
+                    <div id="loginHelp" className="form-text font-bold mt-4">
                       Already have an account? <a style={{color: "blue", textDecoration: "underline"}} href="login">Login</a>
                     </div>
                     <button
                       type="submit"
-                      className="btn btn-primary formBtn"
+                      className="btn btn-primary formBtn bg-green-600"
                     >
                       Register
                     </button>
                   </>
                 ) : (
-                  <>
-                    <div id="registerHelp" className="form-text">
+                  <div className="mt-4">
+                    <div id="registerHelp" className="form-text font-bold mb-4">
                       Don't have an account? <a style={{color: "blue", textDecoration: "underline"}} href="register">Register</a>
                     </div>
                     <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary bg-green-600"
                     >
                       Login
                     </button>
-                  </>
+                  </div>
                 )}
               </form>
             </div>
