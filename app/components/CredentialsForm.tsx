@@ -72,7 +72,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
           >
             <Image
               priority
-              style={{ width: "90%", height: "auto" }}
+              style={{ width: "75%", height: "auto" }}
               src={logo}
               alt="Work Weeks Logo"
             />
@@ -80,7 +80,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
           <div
             className={`col w-100 vh-100 d-flex flex-column align-items-center justify-content-center`}
           >
-            <h3 style={{fontSize: "150%"}}>
+            <h3 style={{fontSize: "200%"}} className="text-5xl mb-4 font-bold font-sans tracking-wider text-blue-950">
               {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
             </h3>
             <div className="customFormContainer">
