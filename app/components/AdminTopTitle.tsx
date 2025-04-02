@@ -4,10 +4,9 @@ import {SignOutButton, HomeButton} from "./Buttons";
 export default function AdminTopTitle({ title, link } : { title: string, link: string }) {
   return (
     <div
-      className="relative flex items-center justify-center"
+      className="relative flex items-center justify-center bg-gradient-to-r from-green-600 to-blue-950"
       style={{
         borderRadius: "20px",
-        backgroundColor: "rgb(185, 187, 190)",
         width: "100%",
         height: "20vh",
         marginBottom: 30,
