@@ -97,7 +97,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                       <input
                         type="text"
                         placeholder="Enter First Name"
-                        className="form-control font-bold"
+                        className="form-control"
                         id="firstNameInput"
                         name="firstName"
                         aria-describedby="emailHelp"
