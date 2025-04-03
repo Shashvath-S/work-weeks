@@ -105,7 +105,7 @@ export default function EmployeeClock({email}: { email: string }) {
                     <div className="flex space-x-4 justify-center">
                         <div className="bg-green-600 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
-                                className="h-full w-full"
+                                className="h-full w-full font-bold"
 
                                 onClick={() => {setClockInTime(new Date().toISOString()); postClockIn()}}>
                                 Clock In
@@ -114,7 +114,7 @@ export default function EmployeeClock({email}: { email: string }) {
                         </div>
                         <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
-                                className="h-full w-full"
+                                className="h-full w-full font-bold"
 
                                 onClick={() => {setClockOutTime(new Date().toISOString()); postClockOut()}}
                             >
@@ -123,11 +123,11 @@ export default function EmployeeClock({email}: { email: string }) {
                             </button>
                         </div>
                     </div>
-                    <div className="flex space-x-4 justify-center">
+                    <div className="flex space-x-4">
                         <div
                             className="p-4 w-1/2 text-center rounded-lg bg-green-600 text-white"
                             style={{
-                                height: "50px",
+                                height: "70px",
                             }}
                         >
                             {clockInTime != "" && <p>Clocked In at {new Date(clockInTime).toLocaleTimeString()}</p>}
@@ -135,7 +135,7 @@ export default function EmployeeClock({email}: { email: string }) {
                         <div
                             className="p-4 w-1/2 text-center rounded-lg bg-blue-950 text-white"
                             style={{
-                                height: "50px",
+                                height: "70px",
                             }}
                         >
                             {clockOutTime != "" && <p>Clocked Out at {new Date(clockOutTime).toLocaleTimeString()}</p>}
