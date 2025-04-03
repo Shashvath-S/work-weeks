@@ -95,11 +95,8 @@ export default function EmployeeClock({email}: { email: string }) {
 
 
     return (
-        <div className="flex items-center justify-center h-screen" style={{margin: "0 10px 0 10px"}}>
+        <div className="flex items-center justify-center" style={{marginTop: "50px"}}>
             <div className="w-full align-items-center">
-                <div className="text-center mb-4">
-                    <h1 className="text-4xl font-bold">Work Weeks</h1>
-                </div>
                 <div className="flex flex-col space-y-4 w-full">
                     <div className="flex space-x-4 justify-center">
                         <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
@@ -152,7 +149,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 postSubmit()
                             }}
                             disabled={submitted || clockInTime == "" || clockOutTime == ""}
-                            className="h-full w-full bg-gradient-to-l from-green-600 to-blue-950"
+                            className="h-full w-full bg-gradient-to-l from-green-600 to-blue-950 rounded-lg"
                         >
                             Submit Timesheet for Day
                         </button>
@@ -161,7 +158,6 @@ export default function EmployeeClock({email}: { email: string }) {
                         <p>{submitted && "Successfully Submitted Timesheet!"}</p>
                     </div>
                 </div>
-                <button onClick={() => signOut({callbackUrl: "/"})} className="btn btn-primary">Sign Out</button>
             </div>
         </div>
 

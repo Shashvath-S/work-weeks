@@ -5,18 +5,14 @@ export default async function Home() {
   return (
     <div className="bg-gradient-to-t from-green-600 to-blue-950 vh-100 container-fluid d-flex flex-column justify-content-center align-items-center">
       <div className="p-5 rounded-xl container-fluid d-flex flex-column justify-content-center align-items-center vh-75 w-1/2 bg-white">
-        <h1 className="text-5xl mb-4 font-bold font-sans tracking-wider">
-          <span className="text-blue-950">Work</span>
-          <span className="text-green-600">Weeks</span>
-        </h1>
         <div className="position-relative mb-5">
           <div
             className="rounded-circle bg-white shadow-lg d-flex justify-content-center align-items-center"
             style={{
               width: "15vw",
               height: "15vw",
-              maxWidth: "300px",
-              maxHeight: "300px",
+              maxWidth: "375px",
+              maxHeight: "375px",
               border: "1px solid #dee2e6",
             }}
           >

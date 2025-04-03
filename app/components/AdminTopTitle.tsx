@@ -12,7 +12,7 @@ export default function AdminTopTitle({ title, link } : { title: string, link: s
         marginBottom: 30,
       }}
     >
-      {title != "Work Weeks"&& <HomeButton />}
+      {title != "Work Weeks" && <HomeButton />}
       <h1
         style={{
           fontSize: "325%",
