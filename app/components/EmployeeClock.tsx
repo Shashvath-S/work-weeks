@@ -57,7 +57,7 @@ export default function EmployeeClock({email}: { email: string }) {
             method: "POST",
             body: JSON.stringify({
                 clockInOutSubmit: "submit",
-                time: (lco.getTime() - lci.getTime())/1000/60/60,
+                time: Math.round((lco.getTime() - lci.getTime())/1000/60/60),
                 email: email,
             }),
         })
