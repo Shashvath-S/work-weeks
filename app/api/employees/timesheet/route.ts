@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     console.log("--------------")
 
 
-    if (!time) {
+    if (time === null) {
         return Response.json({err: "Time was null", succeeded: false});
     }
     console.log(time)

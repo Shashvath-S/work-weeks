@@ -53,6 +53,10 @@ export default function EmployeeClock({email}: { email: string }) {
         setSubmitted(true)
         const lci = new Date(clockInTime)
         const lco = new Date(clockOutTime)
+        console.log("lci:", lci)
+        console.log("lco:", lco)
+        console.log("lco:", lco.getTime())
+        console.log("total hours", Math.round((lco.getTime() - lci.getTime())/1000/60/60))
         const timesheetPost = await fetch("/api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
@@ -148,7 +152,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             onClick={() => {
                                 postSubmit()
                             }}
-                            disabled={submitted || clockInTime == "" || clockOutTime == ""}
+                            disabled={clockInTime == "" || clockOutTime == ""}
                             className="h-full w-full bg-gradient-to-r from-green-600 to-blue-950 rounded-lg"
                         >
                             Submit Timesheet for Day
