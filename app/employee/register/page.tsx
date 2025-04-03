@@ -28,13 +28,14 @@ export default function Register() {
       setError({ isError: true, errorMessage: "Passwords do not match" });
     }
 
-    const res = await fetch("api/employees/fetchOtp", {
+    const res = await fetch("/api/employees/fetchOtp", {
       method: "POST",
       body: JSON.stringify({ email }),
     })
+
     if (res.ok) {
       const { myOTP } = await res.json();
-      if (myOTP === otp) {
+      if (myOTP == otp) {
         const response = await fetch("/api/employees/register", {
           method: "PUT",
           body: JSON.stringify({ email, password }),
@@ -42,6 +43,7 @@ export default function Register() {
 
         if (response.ok) {
           await signIn("credentials", { email, password, redirect: false });
+          redirect("/employee/login");
         } else {
           const res = await response.json();
           setError({ isError: true, errorMessage: res.message });
