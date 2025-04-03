@@ -8,44 +8,44 @@ export default function EmployeeClock({email}: { email: string }) {
     const [clockOutTime, setClockOutTime] = useState("");
     const [submitted, setSubmitted] = useState(false);
 
-    useEffect(() => {
-        const fetchTimesheet = async () => {
-            const response = await fetch("../../api/employees/get_timesheet", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to fetch timesheet data");
-            }
-
-                const data = await response.json();
-                console.log("Fetched timesheet data:", data);
-
-                // Check if there are clock times from today
-            if (data.clockInTime) {
-                const fetchedClockInTime = new Date(data.clockInTime);
-                console.log("Fetched clockInTime:", fetchedClockInTime);
-                if (fetchedClockInTime > new Date(new Date().getDate()-1)) {
-                    setClockInTime(data.clockInTime);
-                }
-            }
-
-            if (data.clockOutTime) {
-                const fetchedClockOutTime = new Date(data.clockOutTime);
-                console.log("Fetched clockOutTime:", fetchedClockOutTime);
-                if (fetchedClockOutTime > new Date(new Date().getDate()-1)) {
-                    setClockOutTime(data.clockOutTime);
-                }
-            }
-        }
-        fetchTimesheet();
-
-
-    })
+    // useEffect(() => {
+    //     const fetchTimesheet = async () => {
+    //         const response = await fetch("/api/employees/get_timesheet", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({ email }),
+    //         });
+    //
+    //         if (!response.ok) {
+    //             throw new Error("Failed to fetch timesheet data");
+    //         }
+    //
+    //             const data = await response.json();
+    //             console.log("Fetched timesheet data:", data);
+    //
+    //             // Check if there are clock times from today
+    //         if (data.clockInTime) {
+    //             const fetchedClockInTime = new Date(data.clockInTime);
+    //             console.log("Fetched clockInTime:", fetchedClockInTime);
+    //             if (fetchedClockInTime > new Date(new Date().getDate()-1)) {
+    //                 setClockInTime(data.clockInTime);
+    //             }
+    //         }
+    //
+    //         if (data.clockOutTime) {
+    //             const fetchedClockOutTime = new Date(data.clockOutTime);
+    //             console.log("Fetched clockOutTime:", fetchedClockOutTime);
+    //             if (fetchedClockOutTime > new Date(new Date().getDate()-1)) {
+    //                 setClockOutTime(data.clockOutTime);
+    //             }
+    //         }
+    //     }
+    //     fetchTimesheet();
+    //
+    //
+    // })
 
 
 
@@ -53,7 +53,7 @@ export default function EmployeeClock({email}: { email: string }) {
         setSubmitted(true)
         const lci = new Date(clockInTime)
         const lco = new Date(clockOutTime)
-        const timesheetPost = await fetch("../../api/employees/timesheet", {
+        const timesheetPost = await fetch("/api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
                 clockInOutSubmit: "submit",
@@ -65,10 +65,10 @@ export default function EmployeeClock({email}: { email: string }) {
 
     }
 
-    async function postClockIn(time: string) {
-        const lci = new Date(time)
-        console.log(lci.getTime())
-        const clockInPost = await fetch("../../api/employees/timesheet", {
+    async function postClockIn() {
+        const lci = new Date().toISOString();
+        console.log("LCIIII: ", lci)
+        const clockInPost = await fetch("/api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
                 clockInOutSubmit: "clockIn",
@@ -79,9 +79,9 @@ export default function EmployeeClock({email}: { email: string }) {
         console.log(await clockInPost.json())
     }
 
-    async function postClockOut(time: string) {
-        const lco = new Date(time)
-        const clockOutPost = await fetch("../../api/employees/timesheet", {
+    async function postClockOut() {
+        const lco = new Date().toISOString()
+        const clockOutPost = await fetch("/api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
                 clockInOutSubmit: "clockOut",
@@ -105,17 +105,19 @@ export default function EmployeeClock({email}: { email: string }) {
                         <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
-                                disabled={clockInTime != ""}
-                                onClick={() => {console.log(new Date().toISOString()); setClockInTime(new Date().toISOString()); postClockIn(new Date().toISOString())}}>
+
+                                onClick={() => {setClockInTime(new Date().toISOString()); postClockIn()}}>
                                 Clock In
                             </button>
+                            {/*disabled={clockInTime != ""}*/}
                         </div>
                         <div className="bg-green-600 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
-                                disabled={clockOutTime != "" || clockInTime == ""}
-                                onClick={() => {setClockOutTime(new Date().toISOString()); postClockOut(new Date().toISOString())}}
+
+                                onClick={() => {setClockOutTime(new Date().toISOString()); postClockOut()}}
                             >
+                                {/*disabled={clockOutTime != "" || clockInTime == ""}*/}
                                 Clock Out
                             </button>
                         </div>
