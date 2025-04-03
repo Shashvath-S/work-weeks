@@ -31,9 +31,8 @@ export default function BootstrapOptionCard({
           <div>
             {title === "Timesheets" ? (
               <a
-                style={{ borderColor: "black" }}
                 type="button"
-                className="btn bg-green-600 border-blue-950 text-white"
+                className="btn bg-green-600 text-white"
                 href={`${link}/view`}
               >
                 View
@@ -41,17 +40,16 @@ export default function BootstrapOptionCard({
             ) : (
               <>
                 <a
-                  style={{ borderColor: "black" }}
                   href={`${link}/create`}
                   type="button"
-                  className="btn bg-green-600 border-blue-950 text-white"
+                  className="btn bg-green-600 hover:bg-green-700 text-white"
                 >
                   Create
                 </a>
                 <a
-                  style={{ borderColor: "black", marginLeft: 8 }}
+                  style={{ marginLeft: 8 }}
                   type="button"
-                  className="btn bg-green-600 border-blue-950 text-white"
+                  className="btn bg-green-600 hover:bg-green-700 text-white"
                   href={`${link}/view`}
                 >
                   View
