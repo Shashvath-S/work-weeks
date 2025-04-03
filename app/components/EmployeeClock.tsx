@@ -28,6 +28,7 @@ export default function EmployeeClock({email}: { email: string }) {
                 // Check if there are clock times from today
             if (data.clockInTime) {
                 const fetchedClockInTime = new Date(data.clockInTime);
+                console.log("Fetched clockInTime:", fetchedClockInTime);
                 if (fetchedClockInTime > new Date(new Date().getDate()-1)) {
                     setClockInTime(data.clockInTime);
                 }
@@ -35,6 +36,7 @@ export default function EmployeeClock({email}: { email: string }) {
 
             if (data.clockOutTime) {
                 const fetchedClockOutTime = new Date(data.clockOutTime);
+                console.log("Fetched clockOutTime:", fetchedClockOutTime);
                 if (fetchedClockOutTime > new Date(new Date().getDate()-1)) {
                     setClockOutTime(data.clockOutTime);
                 }
@@ -65,6 +67,7 @@ export default function EmployeeClock({email}: { email: string }) {
 
     async function postClockIn(time: string) {
         const lci = new Date(time)
+        console.log(lci.getTime())
         const clockInPost = await fetch("../../api/employees/timesheet", {
             method: "POST",
             body: JSON.stringify({
@@ -93,14 +96,13 @@ export default function EmployeeClock({email}: { email: string }) {
 
     return (
         <div className="flex items-center justify-center h-screen" style={{margin: "0 10px 0 10px"}}>
-            <div className="w-full">
+            <div className="w-full align-items-center">
                 <div className="text-center mb-4">
                     <h1 className="text-4xl font-bold">Work Weeks</h1>
-                    <button onClick={() => signOut({callbackUrl: "/"})} className="btn btn-primary">Sign Out</button>
                 </div>
                 <div className="flex flex-col space-y-4 w-full">
                     <div className="flex space-x-4 justify-center">
-                        <div className="bg-blue-500 text-white p-4 w-1/2 text-center rounded-lg">
+                        <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
                                 disabled={clockInTime != ""}
@@ -108,7 +110,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 Clock In
                             </button>
                         </div>
-                        <div className="bg-green-500 text-white p-4 w-1/2 text-center rounded-lg">
+                        <div className="bg-green-600 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
                                 disabled={clockOutTime != "" || clockInTime == ""}
@@ -120,18 +122,16 @@ export default function EmployeeClock({email}: { email: string }) {
                     </div>
                     <div className="flex space-x-4 justify-center">
                         <div
-                            className="p-4 w-1/2 text-center rounded-lg"
+                            className="p-4 w-1/2 text-center rounded-lg bg-blue-950 text-white"
                             style={{
-                                backgroundColor: "#00b69d",
                                 height: "50px",
                             }}
                         >
                             {clockInTime != "" && <p>Clocked In at {new Date(clockInTime).toLocaleTimeString()}</p>}
                         </div>
                         <div
-                            className="p-4 w-1/2 text-center rounded-lg"
+                            className="p-4 w-1/2 text-center rounded-lg bg-green-600 text-white"
                             style={{
-                                backgroundColor: "#00b69d",
                                 height: "50px",
                             }}
                         >
@@ -139,7 +139,7 @@ export default function EmployeeClock({email}: { email: string }) {
                         </div>
                     </div>
                     <div
-                        className="bg-purple-500 text-white rounded-lg"
+                        className="bg-gradient-r from-green-600 to-blue-950 text-white rounded-lg"
                         style={{
                             height: "50px",
                         }}
@@ -149,8 +149,8 @@ export default function EmployeeClock({email}: { email: string }) {
                             onClick={() => {
                                 postSubmit()
                             }}
-                            disabled={submitted}
-                            className="h-full w-full"
+                            disabled={submitted || clockInTime == "" || clockOutTime == ""}
+                            className="h-full w-full bg-gradient-to-l from-green-600 to-blue-950"
                         >
                             Submit Timesheet for Day
                         </button>
@@ -159,6 +159,7 @@ export default function EmployeeClock({email}: { email: string }) {
                         <p>{submitted && "Successfully Submitted Timesheet!"}</p>
                     </div>
                 </div>
+                <button onClick={() => signOut({callbackUrl: "/"})} className="btn btn-primary">Sign Out</button>
             </div>
         </div>
 
