@@ -167,7 +167,7 @@ export default function CreateEmployeeForm({ id }: { id: number }) {
             <div className="d-grid gap-2">
               <button
                 type="submit"
-                className="btn btn-green-600 btn-lg"
+                className="btn text-white btn-green-600 btn-lg"
                 disabled={!name || !email || !role}
               >
                 Create Employee

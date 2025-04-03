@@ -15,7 +15,7 @@ export default function AdminTopTitle({ title, link } : { title: string, link: s
       {title != "Work Weeks"&& <HomeButton />}
       <h1
         style={{
-          fontSize: "200%",
+          fontSize: "325%",
           color: "white",
           fontWeight: "bold",
           marginLeft: 20,
