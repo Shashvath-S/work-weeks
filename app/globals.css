@@ -21,6 +21,10 @@ body {
   height: 100%;
 }
 
+/* .btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  background-color: white;
+} */
+
 .inventoryForm {
   padding: 0 20%;
 }
@@ -37,4 +41,8 @@ body {
 
 .customFormFormat > .mb-3 {
   text-align: left;
+}
+
+.btn-green-600 {
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1)) !important;
 }

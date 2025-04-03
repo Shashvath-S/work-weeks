@@ -13,49 +13,54 @@ export default function BootstrapOptionCard({
 }) {
   return (
     <div className="container-fluid">
-    <div className="card" style={{ width: "100%", padding: 25, height: "72vh" }}>
-      <div className="mx-auto align-middle">
-        {title == "Employees" ? (
-          <PersonIcon className="card-image-top" style={{ fontSize: 96 }} />
-        ) : title == "Inventory" ? (
-          <Inventory2Icon className="card-image-top" style={{ fontSize: 96 }} />
-        ) : (
-          <EventNoteIcon className="card-image-top" style={{ fontSize: 96 }} />
-        )}
+      <div
+        className="flex items-center justify-center shadow-lg border-lg"
+        style={{ width: "100%", height: "72vh" }}
+      >
+        <div className="grid-cols-1 text-center">
+          <h1 style={{ fontSize: "300%" }}>{title}</h1>
+          <div>
+            {title == "Employees" ? (
+              <PersonIcon className="m-6" style={{ fontSize: "9rem" }} />
+            ) : title == "Inventory" ? (
+              <Inventory2Icon className="m-6" style={{ fontSize: "9rem" }} />
+            ) : (
+              <EventNoteIcon className="m-6" style={{ fontSize: "9rem" }} />
+            )}
+          </div>
+          <div>
+            {title === "Timesheets" ? (
+              <a
+                style={{ borderColor: "black" }}
+                type="button"
+                className="btn bg-green-600 border-blue-950 text-white"
+                href={`${link}/view`}
+              >
+                View
+              </a>
+            ) : (
+              <>
+                <a
+                  style={{ borderColor: "black" }}
+                  href={`${link}/create`}
+                  type="button"
+                  className="btn bg-green-600 border-blue-950 text-white"
+                >
+                  Create
+                </a>
+                <a
+                  style={{ borderColor: "black", marginLeft: 8 }}
+                  type="button"
+                  className="btn bg-green-600 border-blue-950 text-white"
+                  href={`${link}/view`}
+                >
+                  View
+                </a>
+              </>
+            )}
+          </div>
+        </div>
       </div>
-      <div className="card-body mx-auto">
-        <h5 style={{fontSize: "200%"}} className="card-title">{title}</h5>
-        {title === "Timesheets" ? (
-          <a
-            style={{ borderColor: "black" }}
-            type="button"
-            className="btn"
-            href={`${link}/view`}
-          >
-            View
-          </a>
-        ) : (
-          <>
-            <a
-              style={{ borderColor: "black" }}
-              href={`${link}/create`}
-              type="button"
-              className="btn"
-            >
-              Create
-            </a>
-            <a
-              style={{ borderColor: "black", marginLeft: 8 }}
-              type="button"
-              className="btn"
-              href={`${link}/view`}
-            >
-              View
-            </a>
-          </>
-        )}
-      </div>
-    </div>
     </div>
   );
 }
