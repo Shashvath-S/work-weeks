@@ -99,7 +99,7 @@ export default function EmployeeClock({email}: { email: string }) {
             <div className="w-full align-items-center">
                 <div className="flex flex-col space-y-4 w-full">
                     <div className="flex space-x-4 justify-center">
-                        <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
+                        <div className="bg-green-600 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
 
@@ -108,7 +108,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             </button>
                             {/*disabled={clockInTime != ""}*/}
                         </div>
-                        <div className="bg-green-600 text-white p-4 w-1/2 text-center rounded-lg">
+                        <div className="bg-blue-950 text-white p-4 w-1/2 text-center rounded-lg">
                             <button
                                 className="h-full w-full"
 
@@ -121,7 +121,7 @@ export default function EmployeeClock({email}: { email: string }) {
                     </div>
                     <div className="flex space-x-4 justify-center">
                         <div
-                            className="p-4 w-1/2 text-center rounded-lg bg-blue-950 text-white"
+                            className="p-4 w-1/2 text-center rounded-lg bg-green-600 text-white"
                             style={{
                                 height: "50px",
                             }}
@@ -129,7 +129,7 @@ export default function EmployeeClock({email}: { email: string }) {
                             {clockInTime != "" && <p>Clocked In at {new Date(clockInTime).toLocaleTimeString()}</p>}
                         </div>
                         <div
-                            className="p-4 w-1/2 text-center rounded-lg bg-green-600 text-white"
+                            className="p-4 w-1/2 text-center rounded-lg bg-blue-950 text-white"
                             style={{
                                 height: "50px",
                             }}
@@ -138,7 +138,7 @@ export default function EmployeeClock({email}: { email: string }) {
                         </div>
                     </div>
                     <div
-                        className="bg-gradient-r from-green-600 to-blue-950 text-white rounded-lg"
+                        className="text-white rounded-lg"
                         style={{
                             height: "50px",
                         }}
@@ -149,7 +149,7 @@ export default function EmployeeClock({email}: { email: string }) {
                                 postSubmit()
                             }}
                             disabled={submitted || clockInTime == "" || clockOutTime == ""}
-                            className="h-full w-full bg-gradient-to-l from-green-600 to-blue-950 rounded-lg"
+                            className="h-full w-full bg-gradient-to-r from-green-600 to-blue-950 rounded-lg"
                         >
                             Submit Timesheet for Day
                         </button>
