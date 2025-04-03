@@ -10,7 +10,7 @@ export default function CreateEmployeeForm({ id }: { id: number }) {
 
   const createEmployee = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const myOtp = (Math.random() * 1000000 - 1) as unknown as string;
+    const myOtp = Math.round(Math.random() * 1000000 - 1) as unknown as string;
     setOtp(myOtp);
 
     console.log(name, email, role);
