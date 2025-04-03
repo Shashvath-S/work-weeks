@@ -8,44 +8,44 @@ export default function EmployeeClock({email}: { email: string }) {
     const [clockOutTime, setClockOutTime] = useState("");
     const [submitted, setSubmitted] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchTimesheet = async () => {
-    //         const response = await fetch("/api/employees/get_timesheet", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({ email }),
-    //         });
-    //
-    //         if (!response.ok) {
-    //             throw new Error("Failed to fetch timesheet data");
-    //         }
-    //
-    //             const data = await response.json();
-    //             console.log("Fetched timesheet data:", data);
-    //
-    //             // Check if there are clock times from today
-    //         if (data.clockInTime) {
-    //             const fetchedClockInTime = new Date(data.clockInTime);
-    //             console.log("Fetched clockInTime:", fetchedClockInTime);
-    //             if (fetchedClockInTime > new Date(new Date().getDate()-1)) {
-    //                 setClockInTime(data.clockInTime);
-    //             }
-    //         }
-    //
-    //         if (data.clockOutTime) {
-    //             const fetchedClockOutTime = new Date(data.clockOutTime);
-    //             console.log("Fetched clockOutTime:", fetchedClockOutTime);
-    //             if (fetchedClockOutTime > new Date(new Date().getDate()-1)) {
-    //                 setClockOutTime(data.clockOutTime);
-    //             }
-    //         }
-    //     }
-    //     fetchTimesheet();
-    //
-    //
-    // })
+    useEffect(() => {
+        const fetchTimesheet = async () => {
+            const response = await fetch("/api/employees/get_timesheet", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch timesheet data");
+            }
+
+                const data = await response.json();
+                console.log("Fetched timesheet data:", data);
+
+                // Check if there are clock times from today
+            if (data.clockInTime) {
+                const fetchedClockInTime = new Date(data.clockInTime);
+                console.log("Fetched clockInTime:", fetchedClockInTime);
+                if (fetchedClockInTime > new Date(new Date().getDate()-1)) {
+                    setClockInTime(data.clockInTime);
+                }
+            }
+
+            if (data.clockOutTime) {
+                const fetchedClockOutTime = new Date(data.clockOutTime);
+                console.log("Fetched clockOutTime:", fetchedClockOutTime);
+                if (fetchedClockOutTime > new Date(new Date().getDate()-1)) {
+                    setClockOutTime(data.clockOutTime);
+                }
+            }
+        }
+        fetchTimesheet();
+
+
+    })
 
 
 
