@@ -22,7 +22,7 @@ export default function CreateEmployeeForm({ id }: { id: number }) {
 
   return (
     <div className="container d-flex justify-content-center">
-      <div className="card shadow-lg border-0 " style={{ width: "500px" }}>
+      <div className="card shadow-lg border-0 rounded-2xl" style={{ width: "500px" }}>
         <div className="card-body p-4">
           <form onSubmit={createEmployee}>
             <div className="mb-3">
