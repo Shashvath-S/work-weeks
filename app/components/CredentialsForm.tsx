@@ -85,7 +85,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                 className="customFormFormat"
                 onSubmit={!isLoginForm ? handleRegister : handleLogin}
               >
-                  <h3 style={{fontSize: "200%"}} className="text-5xl mb-8 font-bold font-sans tracking-[0.13em] text-blue-950 text-justify">
+                  <h3 style={{fontSize: "200%"}} className="text-5xl mb-8 font-bold font-sans tracking-[0.13em] text-blue-950 text-left">
                       {!isLoginForm ? "Welcome to Work Weeks!" : "Welcome Back!"}
                   </h3>
                 {!isLoginForm && (
@@ -160,7 +160,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                 </div>
                 {!isLoginForm && (
                     <div className="mb-3">
-                    <label htmlFor="checkPasswordInput" className="form-label">
+                    <label htmlFor="checkPasswordInput" className="form-label font-bold">
                       Confirm Password
                     </label>
                     <input
@@ -189,7 +189,7 @@ export default function CredentialsForm({isLoginForm, isAdmin, backendSession}: 
                     </div>
                     <button
                       type="submit"
-                      className="btn btn-primary formBtn bg-green-600"
+                      className="btn formBtn bg-green-600 hover:bg-green-700 text-white"
                     >
                       Register
                     </button>
