@@ -1,6 +1,7 @@
 import TableComponent from "@/app/components/TableComponent";
 import db from "@/app/lib/db";
 import {iUser} from "@/app/admin/employees/view/page";
+import AdminTopTitle from "@/app/components/AdminTopTitle";
 
 const columns = [
     {
@@ -34,6 +35,7 @@ export default async function Page() {
     }
     return (
         <div className="px-4 py-4">
+            <AdminTopTitle title="Timesheets" link="" />
             <TableComponent columns={columns} rows={getUsers}/>
         </div>
     )
